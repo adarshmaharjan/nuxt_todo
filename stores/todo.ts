@@ -35,7 +35,6 @@ export const useTodoStore = defineStore(todoStore, () => {
     useLocalStorage("todos", todos.value);
   };
   const getAllTodo = computed<TodoType[]>(() => {
-    console.log(todos.value);
     return todos.value;
   });
   const deleteTodo = (id: string) => {
