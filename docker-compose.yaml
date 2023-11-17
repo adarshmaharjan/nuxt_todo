@@ -1,0 +1,13 @@
+version: '0.1'
+
+services:
+  nuxt:
+    build:
+      context: .
+    image: nuxt_dev
+    container_name: nuxt_dev
+    command: pnpm run dev
+    volumes:
+      - ./
+    ports:
+      - '3000:3000'

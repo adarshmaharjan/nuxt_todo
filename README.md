@@ -77,7 +77,7 @@ bun run preview
 ## Added eslint
 
 ```
-  eslint --fix
+  eslint
 ```
 
 Check out the
