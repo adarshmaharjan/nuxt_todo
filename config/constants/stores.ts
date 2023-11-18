@@ -1,2 +1,2 @@
 export const appStore = "app";
-export const todoStore = "";
+export const todoStore = "todoStore";

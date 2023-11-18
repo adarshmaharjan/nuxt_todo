@@ -1,20 +1,20 @@
+import { useStorage as useStorageCore } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { uuid } from "vue-uuid";
 import { todoStore } from "~/config/constants";
 import type { TodoType } from "~/types";
 export const useTodoStore = defineStore(todoStore, () => {
-  // let initialValue: TodoType[] = [];
-  // if (process.client) {
-  //   if (localStorage.getItem("todos")) {
-  //     initialValue = [...JSON.parse(localStorage.getItem("todos") ?? "")];
-  //   } else {
-  //     initialValue = [];
-  //   }
-  // }
+  const getDefaultSettings = (): TodoType[] => [];
+  // const getSettings = () => {
+  //   const settings = process.client ? localStorage.getItem(todoStore) : null;
+  //   return settings ? JSON.parse(settings) : getDefaultSettings();
+  // };
+  // // const todos = ref<TodoType[]>([]);
+  // const todos = ref<TodoType[]>(getSettings());
 
-  // console.log(initialValue);
-  // const todos = useLocalStorage("todos", computed(() => initialValue).value);
-  const todos = ref<TodoType[]>([]);
+  const todos = useStorageCore<TodoType[]>(todoStore, [], localStorage, {
+    mergeDefaults: true
+  });
   const createTodo = ({
     task,
     description,
@@ -32,7 +32,7 @@ export const useTodoStore = defineStore(todoStore, () => {
       task
     };
     todos.value = [...todos.value, newTask];
-    useLocalStorage("todos", todos.value);
+    // useLocalStorage(todoStore, todos.value);
   };
   const getAllTodo = computed<TodoType[]>(() => {
     return todos.value;
@@ -49,6 +49,7 @@ export const useTodoStore = defineStore(todoStore, () => {
   const deleteAllTodo = () => {
     todos.value = [];
   };
+
   return {
     todos,
     createTodo,

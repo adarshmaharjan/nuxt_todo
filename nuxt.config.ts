@@ -1,5 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  routeRules: {
+    // ! local storage not working in ssr
+    "/": { ssr: false }
+  },
   devtools: {
     enabled: true,
 
